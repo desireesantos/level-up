@@ -1,14 +1,26 @@
-import static spark.Spark.*;
-import spark.*;
+import static spark.Spark.get;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
+import spark.template.freemarker.FreeMarkerRoute;
 
 public class HelloWorld {
 
     public static void main(String[] args) {
 
-        get(new Route("/welcome") {
+        get(new FreeMarkerRoute("/index") {
             @Override
-            public Object handle(Request request, Response response) {
-                return "Bem vindo!";
+            public ModelAndView handle(Request request, Response response) {
+                Map<String, Object> attributes = new HashMap<>();
+                attributes.put("message", "Hello World!");
+
+                // The hello.ftl file is located in directory:
+                // src/test/resources/spark/template/freemarker
+                return modelAndView(attributes, "index.ftl");
             }
         });
 
