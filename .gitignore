@@ -14,6 +14,7 @@ target/
 .classpath
 .project
 .settings/
+*.xml
 
 ## generic files to ignore
 *~
