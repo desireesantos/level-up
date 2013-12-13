@@ -1,11 +1,24 @@
 html {
     height: 100%
 }
-body {
+html, body, #map-canvas {
     height: 100%;
     margin: 0;
-    padding: 0
+    padding: 0;
 }
-#map-canvas {
-    height: 100%
+
+#panel {
+    position: absolute;
+    top: 5px;
+    left: 92%;
+    margin-left: -180px;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
 }
+
+input{
+    font-weight: bold;
+}
+
