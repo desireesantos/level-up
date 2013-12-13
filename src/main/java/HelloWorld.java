@@ -7,6 +7,7 @@ import spark.Route;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,24 +17,26 @@ public class HelloWorld {
 
     public static void main(String[] args) {
 
-        final Configuration setup = new Configuration();
-        setup.setClassForTemplateLoading(HelloWorld.class, "/");
+        final Configuration configuration = new Configuration();
+        configuration.setClassForTemplateLoading(HelloWorld.class, "/");
 
-        get(new Route("/index") {
+        get(new Route("/") {
             @Override
-            public Object handle(Request request, Response response) {
-                StringWriter view = new StringWriter();
+            public Object handle(final Request request, final Response response) {
+                Writer stringWriter = new StringWriter();
                 Map<String, Object> attributes = new HashMap<>();
-                attributes.put("name", "Hello Word");
+                attributes.put("name", "Start Project");
                 try {
-                    Template template = setup.getTemplate("view/index.html");
-                    template.process(attributes, view);
+                    Template template = configuration.getTemplate("/view/index.html");
+                    template.process(attributes, stringWriter);
                 } catch (TemplateException e) {
                     e.printStackTrace();
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     e.printStackTrace();
                 }
-                return view;
+
+                return stringWriter;
             }
         });
     }
