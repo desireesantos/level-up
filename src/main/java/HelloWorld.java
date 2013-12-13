@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static spark.Spark.get;
+import static spark.Spark.setPort;
+import static spark.Spark.staticFileLocation;
 
 public class HelloWorld {
 
@@ -19,6 +21,9 @@ public class HelloWorld {
 
         final Configuration configuration = new Configuration();
         configuration.setClassForTemplateLoading(HelloWorld.class, "/");
+
+        setPort(8000);
+        staticFileLocation("/public");
 
         get(new Route("/") {
             @Override
