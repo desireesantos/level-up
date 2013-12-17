@@ -10,12 +10,13 @@
 *.jar
 *.war
 *.ear
+*.xml
 
 target/
 .classpath
 .project
 .settings/
-*.xml
+.idea/
 
 ## generic files to ignore
 *~
