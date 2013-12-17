@@ -1,0 +1,31 @@
+<html>
+<head>
+    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script type='text/javascript'>
+        google.load('visualization', '1', {'packages': ['geomap']});
+        google.setOnLoadCallback(drawMap);
+
+        function drawMap() {
+            var data = google.visualization.arrayToDataTable([
+                ['City', 'Popularity'],
+                ['Brazil', 200]
+            ]);
+
+            var options = {};
+            options['region'] = 'BR';
+            options['colors'] = [0xFF8747, 0xFFB581, 0xc06000]; //orange colors
+            options['dataMode'] = 'markers';
+
+            var container = document.getElementById('map_canvas');
+            var geomap = new google.visualization.GeoMap(container);
+            geomap.draw(data, options);
+        };
+
+    </script>
+</head>
+
+<body>
+<div id='map_canvas'style="width: 2000px; height: 500px;" ></div>
+</body>
+
+</html>

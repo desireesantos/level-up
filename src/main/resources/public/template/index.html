@@ -6,13 +6,14 @@
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJQ59nuKUo1aSnhH0EV_UyJZSu0t3XU-4&sensor=true">
     </script>
-    <script type="text/javascript" src="/js/map.js"></script>
+    <script type="text/javascript" src="/js/address.js"></script>
 </head>
 <body>
 <div id="panel">
-    <input id="address" type="textbox" placeholder="Rio de Janeiro,RJ">
-    <input type="button" value="Go" onclick="goToAddress()" size="30">
+    <input id="address" type="textbox" placeholder="Rio de Janeiro,RJ" autofocus>
+    <input type="submit" value="Go" onclick="goToAddress()" size="30">
 </div>
+
 <div id="map-canvas"/>
 </body>
 </html>

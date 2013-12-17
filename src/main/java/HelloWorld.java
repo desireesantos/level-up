@@ -32,12 +32,30 @@ public class HelloWorld {
                 Map<String, Object> attributes = new HashMap<>();
                 attributes.put("name", "Start Project");
                 try {
-                    Template template = configuration.getTemplate("/view/index.html");
+                    Template template = configuration.getTemplate("/public/template/index.html");
                     template.process(attributes, stringWriter);
                 } catch (TemplateException e) {
                     e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                catch (IOException e) {
+
+                return stringWriter;
+            }
+        });
+
+        get(new Route("/brazil") {
+            @Override
+            public Object handle(final Request request, final Response response) {
+                Writer stringWriter = new StringWriter();
+                Map<String, Object> attributes = new HashMap<>();
+                attributes.put("name", "Start Project");
+                try {
+                    Template template = configuration.getTemplate("/public/template/brazil.html");
+                    template.process(attributes, stringWriter);
+                } catch (TemplateException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
 

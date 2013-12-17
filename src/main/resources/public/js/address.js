@@ -1,6 +1,6 @@
 function initialize() {
     geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var latlng = new google.maps.LatLng(-22.618827234831404, -42.57636812499999);
     var mapOptions = {
         zoom: 8,
         center: latlng
@@ -9,16 +9,16 @@ function initialize() {
 }
 
 function goToAddress() {
-    var address = document.getElementById('address').value;
+    var address = document.getElementById("address").value;
     geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location);
-            new google.maps.Marker({
+            var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location
             });
         } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            alert("Geocode was not successful for the following reason: " + status);
         }
     });
 }
