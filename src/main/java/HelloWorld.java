@@ -29,7 +29,7 @@ public class HelloWorld {
             @Override
             public Object handle(final Request request, final Response response) {
                 Writer stringWriter = new StringWriter();
-                Map<String, Object> attributes = new HashMap<>();
+                Map<String, Object> attributes = new HashMap<String, Object>();
                 attributes.put("name", "Start Project");
                 try {
                     Template template = configuration.getTemplate("/public/template/index.html");
@@ -48,7 +48,7 @@ public class HelloWorld {
             @Override
             public Object handle(final Request request, final Response response) {
                 Writer stringWriter = new StringWriter();
-                Map<String, Object> attributes = new HashMap<>();
+                Map<String, Object> attributes = new HashMap<String, Object>();
                 attributes.put("name", "Start Project");
                 try {
                     Template template = configuration.getTemplate("/public/template/brazil.html");
