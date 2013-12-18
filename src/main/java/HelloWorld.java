@@ -11,9 +11,7 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-import static spark.Spark.get;
-import static spark.Spark.setPort;
-import static spark.Spark.staticFileLocation;
+import static spark.Spark.*;
 
 public class HelloWorld {
 
@@ -22,7 +20,7 @@ public class HelloWorld {
         final Configuration configuration = new Configuration();
         configuration.setClassForTemplateLoading(HelloWorld.class, "/");
 
-        setPort(8000);
+        setPort(Integer.parseInt(System.getenv("PORT")));
         staticFileLocation("/public");
 
         get(new Route("/") {
@@ -62,5 +60,6 @@ public class HelloWorld {
                 return stringWriter;
             }
         });
+
     }
 }
