@@ -20,7 +20,13 @@ public class HelloWorld {
         final Configuration configuration = new Configuration();
         configuration.setClassForTemplateLoading(HelloWorld.class, "/");
 
-        setPort(Integer.parseInt(System.getenv("PORT")));
+
+        String port = System.getenv("PORT");
+
+        if(port == null){
+          port = "8082";
+        }
+        setPort(Integer.parseInt(port));
         staticFileLocation("/public");
 
         get(new Route("/") {
