@@ -4,5 +4,5 @@ jdk:
 
 deploy:
   provider: heroku
-  api_key: a587b995-ec1e-4727-a430-5a17a8570726
+  api_key: "a587b995-ec1e-4727-a430-5a17a8570726"
   strategy: git
