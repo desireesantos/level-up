@@ -67,5 +67,13 @@ public class HelloWorld {
             }
         });
 
+        get(new Route("/focus_points") {
+            @Override
+            public Object handle(final Request request, final Response response) {
+
+                return new FocusPointsFetcher().fetchPoints();
+            }
+        });
+
     }
 }
