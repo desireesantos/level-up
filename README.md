@@ -1,4 +1,5 @@
-level-up
+level-up [![Build Status](https://travis-ci.org/thoughtworks/level-up.png)](https://travis-ci.org/thoughtworks/level-up)
+
 ========
 TO-DO: Do a proper readme.
 
