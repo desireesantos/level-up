@@ -1,11 +1,24 @@
 function initialize() {
     geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(-22.618827234831404, -42.57636812499999);
+    var latitudeAndLongitude = new google.maps.LatLng(-22.618827234831404, -42.57636812499999);
     var mapOptions = {
         zoom: 8,
-        center: latlng
+        center: latitudeAndLongitude
     }
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+    function createMarker(point, htmlPointDescription) {
+        var marker = new google.maps.Marker ({
+           position: point,
+           map: map,
+           title: htmlPointDescription
+        });
+    }
+
+    var pointToShowOnMap = new google.maps.LatLng(-22.618827234831404, -42.57636812499999);
+
+    createMarker(pointToShowOnMap, "Our first point! :)")
 }
 
 function goToAddress() {
