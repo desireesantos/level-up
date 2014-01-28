@@ -1,6 +1,6 @@
 function initialize() {
     geocoder = new google.maps.Geocoder();
-    var latitudeAndLongitude = new google.maps.LatLng(-22.618827234831404, -42.57636812499999);
+    var latitudeAndLongitude = new google.maps.LatLng(-12.0716330, -77.0566020);
     var mapOptions = {
         zoom: 8,
         center: latitudeAndLongitude
@@ -16,9 +16,16 @@ function initialize() {
         });
     }
 
-    var pointToShowOnMap = new google.maps.LatLng(-22.618827234831404, -42.57636812499999);
+    var points = [{latitude:-12.0716330, longitude:-77.0566020}, {latitude:-13.0716376, longitude:-78.0716330}];
 
-    createMarker(pointToShowOnMap, "Our first point! :)")
+
+    for (var i=0; i<points.length; i++)
+    {
+        var point = points[i];
+        var pointToShowOnMap = new google.maps.LatLng(point.latitude, point.longitude);
+        createMarker(pointToShowOnMap, "Our first point! :)")
+    }
+
 }
 
 function goToAddress() {
