@@ -14,30 +14,26 @@ function initialize() {
 
 }
 
-function createMarker(point, htmlPointDescription) {
+function createMarker(coordinate, description) {
 
     var marker = new google.maps.Marker ({
-        position: point,
+        position: coordinate,
         map: map,
-        title: htmlPointDescription
+        title: description
     });
 }
 
 function getCoordinates() {
-    $.getJSON("/focus_points", function (data) {
+    $.getJSON("/coordinates", function (coordinates) {
 
-        var points = data;
-        console.log(points);
-
-        for (var i=0; i<points.length; i++)
+        for (var i=0; i<coordinates.length; i++)
         {
-            var point = points[i];
-            var pointToShowOnMap = new google.maps.LatLng(point.latitude, point.longitude);
-            createMarker(pointToShowOnMap, "Our first point! :)")
+            var coordinate = coordinates[i];
+            var coordinateToShowOnMap = new google.maps.LatLng(coordinate.latitude, coordinate.longitude);
+            createMarker(coordinateToShowOnMap, "coordinate")
         }
     });
 }
-
 
 
 function goToAddress() {

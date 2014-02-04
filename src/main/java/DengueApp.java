@@ -69,7 +69,7 @@ public class DengueApp {
             }
         });
 
-        get (new Route("/focus_points") {
+        get (new Route("/coordinates") {
             @Override
             public Object handle(final Request request, final Response response) {
                 Gson gson = new Gson();
