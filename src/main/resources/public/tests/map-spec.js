@@ -1,4 +1,3 @@
-
 describe("JsonFetcher", function() {
     it("fetch points from server ", function(){
         spyOn($, "getJSON");
@@ -14,7 +13,20 @@ describe("JsonFetcher", function() {
 });
 
 describe("Map Loader", function() {
-    it("loads the map", function(){
+    it("Define the map", function(){
+        spyOn(google.maps,"Map");
+        spyOn(pandas, "getCoordinates");
+
+        expect(pandas.map).toBeUndefined();
+
+        pandas.initialize();
+
+        expect(pandas.map).toBeDefined();
+        expect(google.maps.Map).toHaveBeenCalled();
+        expect(pandas.getCoordinates).toHaveBeenCalled();
     });
 });
+
+
+
 

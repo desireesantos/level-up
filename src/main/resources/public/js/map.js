@@ -1,4 +1,6 @@
-function initialize() {
+var pandas = pandas || {};
+
+pandas.initialize = function() {
     geocoder = new google.maps.Geocoder();
 
     var mapCenter = new google.maps.LatLng(-12.0716330, -77.0566020);
@@ -8,31 +10,30 @@ function initialize() {
         center: mapCenter
     }
 
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    pandas.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-    getCoordinates();
-
+    pandas.getCoordinates();
 }
 
 function createMarker(coordinate, description) {
-
     var marker = new google.maps.Marker ({
         position: coordinate,
-        map: map,
+        map: pandas.map,
         title: description
     });
 }
 
-function getCoordinates() {
-    $.getJSON("/coordinates", function (coordinates) {
-
-        for (var i=0; i<coordinates.length; i++)
-        {
-            var coordinate = coordinates[i];
-            var coordinateToShowOnMap = new google.maps.LatLng(coordinate.latitude, coordinate.longitude);
-            createMarker(coordinateToShowOnMap, "coordinate")
-        }
-    });
+pandas.getCoordinates = function() {
+    var jsonFetcher = pandas.createJsonFetcher("/coordinates");
+    jsonFetcher.fetch(drawCoordinatesOnMap);
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+function drawCoordinatesOnMap(coordinates) {
+    for (var i = 0; i < coordinates.length; i++) {
+        var coordinate = coordinates[i];
+        var coordinateToShowOnMap = new google.maps.LatLng(coordinate.latitude, coordinate.longitude);
+        createMarker(coordinateToShowOnMap, "coordinate");
+    }
+}
+
+google.maps.event.addDomListener(window, 'load', pandas.initialize);
