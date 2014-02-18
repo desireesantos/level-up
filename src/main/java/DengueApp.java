@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -9,17 +11,17 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
 
-public class HelloWorld {
+public class DengueApp {
 
     public static void main(String[] args) {
 
         final Configuration configuration = new Configuration();
-        configuration.setClassForTemplateLoading(HelloWorld.class, "/");
-
+        configuration.setClassForTemplateLoading(DengueApp.class, "/");
 
         String port = System.getenv("PORT");
 
@@ -67,11 +69,13 @@ public class HelloWorld {
             }
         });
 
-        get(new Route("/focus_points") {
+        get (new Route("/coordinates") {
             @Override
             public Object handle(final Request request, final Response response) {
-
-                return new FocusPointsFetcher().fetchPoints();
+                Gson gson = new Gson();
+                FocusPointsFetcher focusPointsFetcher = new FocusPointsFetcher();
+                List<Point> points = focusPointsFetcher.fetchPoints();
+                return gson.toJson(points);
             }
         });
 
