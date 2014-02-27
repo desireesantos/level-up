@@ -26,16 +26,24 @@ describe("Map Loader", function() {
         expect(pandas.centerMap).toHaveBeenCalledWith(pandas.map, "Brazil");
     });
 
-    it("center the map on Brazil", function(){
-        pandas.centerMap(pandas.map, "Brazil");
+    it("center the map on Brazil using Geocoder", function(){
+        var myFakeMap = { setCenter: function(){}};
+        var brLocation = "fake Brazil location";
+        var geocoder = {
+            geocode: function (target, callback) {
+                var result = [
+                    {geometry: {location: brLocation}}
+                ];
+                var status = google.maps.GeocoderStatus.OK;
+                callback(result, status);
+            }
+        };
 
-        var latitudeBR = 11.897013135795008;
-        var longitudeBR = -51.92527999999999;
-
-        expect(pandas.map.getCenter().lng()).toBe(longitudeBR);
-        expect(pandas.map.getCenter().lat()).toBe(latitudeBR);
+        spyOn(google.maps,"Map").and.returnValue(myFakeMap);
+        spyOn(myFakeMap,"setCenter");
+        pandas.initialize(geocoder);
+        expect(pandas.map.setCenter).toHaveBeenCalledWith(brLocation);
     });
-
 });
 
 
