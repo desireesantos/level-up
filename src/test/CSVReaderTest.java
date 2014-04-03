@@ -1,6 +1,7 @@
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -15,6 +16,8 @@ import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @RunWith(PowerMockRunner.class)
@@ -22,19 +25,25 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
 public class CSVReaderTest {
 
     @Test(expected = CSVFileDoesNotExist.class)
-    public void verifyFileExistence() throws Exception {
+    public void verifiesFileExistence() throws Exception {
+//        mockStatic(Files.class);
+        PowerMockito.spy(Files.class);
         CSVReader csvReader = new CSVReader();
-        Path path = Paths.get("../csv") ;
-        mockStatic(Files.class);
-        PowerMockito.when(Files.readAllLines(path, StandardCharsets.UTF_8)).thenThrow(new IOException());
+//        Path path = Paths.get("src/main/resources/public/csv/lat_long_address.csv");
+
+//        PowerMockito.when(Files.readAllLines((Path) any(), eq(StandardCharsets.UTF_8))).thenThrow(new IOException());
+        Mockito.when(Files.readAllLines((Path) any(), eq(StandardCharsets.UTF_8))).thenThrow(new IOException());
 
         csvReader.readFileContent();
-
     }
 
     @Test
-    public void verifyFileShouldHaveContent() throws Exception {
+    public void verifiesFileHasContent() throws Exception {
+        List<String> content;
+        CSVReader csvReader = new CSVReader();
+        content = csvReader.readFileContent();
 
+        assertEquals(0, content.size());
     }
 
     @Test
