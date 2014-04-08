@@ -1,73 +1,50 @@
+import junit.framework.TestCase;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.spy;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(Files.class)
+@RunWith(MockitoJUnitRunner.class)
 public class CSVReaderTest {
 
-    @Test(expected = CSVFileDoesNotExist.class)
-    public void verifiesFileExistence() throws Exception {
-        PowerMockito.mockStatic(Files.class);
+    public static final String PATH_TO_FILE = "pathToFile";
 
-        CSVReader csvReader = new CSVReader();
-        Path path = Paths.get("blabla");
-        Mockito.when(Files.readAllLines(path,StandardCharsets.UTF_8)).thenThrow(new IOException());
+    @Test(expected = IOException.class)
+    public void doNotHandleIOException() throws Exception {
 
-        csvReader.readFileContent();
+        CSVReader csvReader = spy(new CSVReader());
+
+        doThrow(IOException.class).when(csvReader).readFile(PATH_TO_FILE);
+
+        csvReader.readLatitudeLongitudeFromFile(PATH_TO_FILE);
     }
 
-    @Ignore
-    @Test
-    public void verifiesFileHasContent() throws Exception {
-        List<String> content;
-        CSVReader csvReader = new CSVReader();
-        content = csvReader.readFileContent();
+   @Test
+   @Ignore
+   public void parsesLatitudeAndLongitudeFromCSVFile() throws IOException {
 
-        assertEquals(0, content.size());
-    }
+       CSVReader csvReader = spy(new CSVReader());
 
-    @Test
-    @Ignore
-    public void returnsFileContent() throws Exception {
-        CSVReader csvReader = new CSVReader();
-        Path path = Paths.get("../csv") ;
-        mockStatic(Files.class);
+       List<String> lines = new ArrayList<String>();
+       lines.add("-69.19239,-10.70599,69932000,Brazil");
 
-        List<String> fakeContent = new ArrayList<String>();
-        fakeContent.add("fake content first line");
-        PowerMockito.when(Files.readAllLines(path, StandardCharsets.UTF_8)).thenReturn(fakeContent);
+       doReturn(lines).when(csvReader).readFile(PATH_TO_FILE);
 
-        List<String> content =  csvReader.readFileContent();
+       List<Point> points = csvReader.readLatitudeLongitudeFromFile(PATH_TO_FILE);
 
-        assertNotNull(content);
-        assertEquals(1, content.size());
-        assertEquals("fake content first line", content.get(0));
-    }
-
-    @Test
-    public void extractsLatitudeAndLongitude() throws Exception {
-
-
-    }
+       assertEquals(-69.19239, points.get(0).getLatitude());
+       assertEquals(-10.70599, points.get(0).getLongitude());
+   }
 
 
 }
