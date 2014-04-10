@@ -9,7 +9,7 @@ public class PointTest {
 
     @Test
     public void itIsConstructedWithTwoDoubles() throws Exception {
-        Point point = new Point(LONGITUDE, LATITUDE);
+        Point point = new Point(LATITUDE, LONGITUDE);
         assertEquals(LONGITUDE, point.getLongitude());
         assertEquals(LATITUDE, point.getLatitude());
     }

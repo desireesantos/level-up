@@ -3,7 +3,7 @@ public class Point {
     private Double latitude;
     private Double longitude;
 
-    public Point(double longitude, double latitude) {
+    public Point(double latitude, double longitude) {
 
         this.longitude = longitude;
         this.latitude = latitude;
