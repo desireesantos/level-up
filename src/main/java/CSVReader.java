@@ -27,6 +27,6 @@ public class CSVReader {
     }
 
     protected List<String> readFile(String path) throws IOException {
-        return Files.readAllLines(Paths.get("src/main/resources/public/csv/lat_long_address.csv"), StandardCharsets.UTF_8);
+        return Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
     }
 }
