@@ -21,8 +21,8 @@ public class CSVReader {
 
     private Point extractPoint(String line) {
         String location[] = line.split(",");
-        Double latitude = Double.parseDouble(location[0]);
-        Double longitude = Double.parseDouble(location[1]);
+        Double longitude = Double.parseDouble(location[0]);
+        Double latitude = Double.parseDouble(location[1]);
         return new Point(latitude, longitude);
     }
 

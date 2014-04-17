@@ -1,6 +1,4 @@
-import junit.framework.TestCase;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -10,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CSVReaderTest {
@@ -46,10 +41,10 @@ public class CSVReaderTest {
 
         List<Point> points = csvReader.readLatitudeLongitudeFromFile(PATH_TO_FILE);
 
-        assertEquals(-69.19239, points.get(0).getLatitude());
-        assertEquals(-10.70599, points.get(0).getLongitude());
-        assertEquals(-67.80184, points.get(1).getLatitude());
-        assertEquals(-9.97570, points.get(1).getLongitude());
+        assertEquals(-69.19239, points.get(0).getLongitude());
+        assertEquals(-10.70599, points.get(0).getLatitude());
+        assertEquals(-67.80184, points.get(1).getLongitude());
+        assertEquals(-9.97570, points.get(1).getLatitude());
     }
 
 }
