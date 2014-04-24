@@ -1,5 +1,4 @@
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -14,7 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.setPort;
+import static spark.Spark.staticFileLocation;
 
 public class DengueApp {
 
@@ -73,8 +74,13 @@ public class DengueApp {
             @Override
             public Object handle(final Request request, final Response response) {
                 Gson gson = new Gson();
-                FocusPointsFetcher focusPointsFetcher = new FocusPointsFetcher();
-                List<Point> points = focusPointsFetcher.fetchPoints();
+                CSVReader csvReader = new CSVReader();
+                List<Point> points = null;
+                try {
+                    points = csvReader.readLatitudeLongitudeFromFile("src/main/resources/public/csv/long_lat_cep.csv");
+                } catch (IOException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
                 return gson.toJson(points);
             }
         });
