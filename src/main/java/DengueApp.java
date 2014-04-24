@@ -77,7 +77,7 @@ public class DengueApp {
                 CSVReader csvReader = new CSVReader();
                 List<Point> points = null;
                 try {
-                    points = csvReader.readLatitudeLongitudeFromFile("src/main/resources/public/csv/lat_long_address.csv");
+                    points = csvReader.readLatitudeLongitudeFromFile("src/main/resources/public/csv/long_lat_cep.csv");
                 } catch (IOException e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
