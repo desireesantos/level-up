@@ -8,10 +8,9 @@
     <artifactId>level_up</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- To avoid encoding errors -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <powermock.version>1.5.4</powermock.version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
