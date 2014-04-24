@@ -1,6 +1,6 @@
 var pandas = pandas || {};
 
-pandas.initialize = function(geocoder) {
+pandas.initialize = function() {
     var mapCenter = new L.LatLng(-12.0716330, -77.0566020);
 
     var mapOptions = {
@@ -8,18 +8,9 @@ pandas.initialize = function(geocoder) {
         center: mapCenter
     };
 
-    var centerMap = function(map, country, geocoder){
-        geocoder.geocode( {'address' : country}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                map.setCenter(results[0].geometry.location);
-            }
-        });
-    };
-
-    pandas.map = new L.map('map', mapOptions);
+    pandas.map = new L.Map('map', mapOptions);
     var googleLayer = new L.Google('ROADMAP');
     pandas.map.addLayer(googleLayer);
-   // centerMap(pandas.map, "Brazil", geocoder);
     pandas.getCoordinates();
 };
 
