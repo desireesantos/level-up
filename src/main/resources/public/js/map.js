@@ -14,13 +14,14 @@ pandas.initialize = function() {
     pandas.getCoordinates();
 };
 
-function createMarker(coordinate, description) {
+pandas.createMarker = function(coordinate, description){
+
     var marker = new L.Marker ({
         position: coordinate,
-        map: pandas.map,
         title: description
     });
-}
+    marker.addTo(pandas.map);
+};
 
 pandas.getCoordinates = function() {
     var jsonFetcher = pandas.createJsonFetcher("/coordinates");
@@ -32,7 +33,7 @@ function drawCoordinatesOnMap(coordinates) {
     for (var i = 0; i < coordinates.length; i++) {
         var coordinate = coordinates[i];
         var coordinateToShowOnMap = new L.LatLng(coordinate.latitude, coordinate.longitude);
-        createMarker(coordinateToShowOnMap, "coordinate");
+        pandas.createMarker(coordinateToShowOnMap, "coordinate");
     }
 }
 

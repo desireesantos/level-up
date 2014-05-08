@@ -21,10 +21,12 @@
 <script type='text/javascript'>
     $(function() {
         var map = new L.Map('map', {center: new L.LatLng(-14.2400732,-53.1805018), zoom: 4});
+
         var googleLayer = new L.Google('ROADMAP');
 
         var marker = L.marker([-14.2400732,-53.1805018]);
         marker.addTo(map);
+
 
         map.addLayer(googleLayer);
     });
