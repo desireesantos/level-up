@@ -12,10 +12,10 @@ pandas.initialize = function() {
     var googleLayer = new L.Google('ROADMAP');
     pandas.map.addLayer(googleLayer);
     pandas.getCoordinates();
+
 };
 
 pandas.createMarker = function(coordinate, description){
-
     var marker = new L.Marker ({
         position: coordinate,
         title: description
