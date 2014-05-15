@@ -10,17 +10,16 @@ pandas.initialize = function() {
 
     pandas.map = new L.Map('map', mapOptions);
     var googleLayer = new L.Google('ROADMAP');
-    pandas.map.addLayer(googleLayer);
+
     pandas.getCoordinates();
+    pandas.map.addLayer(googleLayer);
+
 };
 
-function createMarker(coordinate, description) {
-    var marker = new L.Marker ({
-        position: coordinate,
-        map: pandas.map,
-        title: description
-    });
-}
+pandas.createMarker = function(coordinate, description){
+    var marker = L.marker(coordinate);
+    marker.addTo(pandas.map);
+};
 
 pandas.getCoordinates = function() {
     var jsonFetcher = pandas.createJsonFetcher("/coordinates");
@@ -32,7 +31,7 @@ function drawCoordinatesOnMap(coordinates) {
     for (var i = 0; i < coordinates.length; i++) {
         var coordinate = coordinates[i];
         var coordinateToShowOnMap = new L.LatLng(coordinate.latitude, coordinate.longitude);
-        createMarker(coordinateToShowOnMap, "coordinate");
+        pandas.createMarker(coordinateToShowOnMap, "coordinate");
     }
 }
 
