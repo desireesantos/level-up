@@ -4,7 +4,7 @@ pandas.initialize = function() {
     var mapCenter = new L.LatLng(-12.0716330, -77.0566020);
 
     var mapOptions = {
-        zoom: 3,
+        zoom: 4,
         center: mapCenter
     };
 
@@ -16,9 +16,9 @@ pandas.initialize = function() {
 
 };
 
-pandas.createMarker = function(coordinate, description){
-    var marker = L.marker(coordinate);
-    marker.addTo(pandas.map);
+pandas.paintHeatmap = function(coordinates, description){
+    var heatmapLayer = L.heatLayer(coordinates, {radius: 30});
+    heatmapLayer.addTo(pandas.map);
 };
 
 pandas.getCoordinates = function() {
@@ -28,11 +28,14 @@ pandas.getCoordinates = function() {
 
 function drawCoordinatesOnMap(coordinates) {
 
+    var coordinate;
+    var coordinatesToShowOnMap = [];
     for (var i = 0; i < coordinates.length; i++) {
-        var coordinate = coordinates[i];
-        var coordinateToShowOnMap = new L.LatLng(coordinate.latitude, coordinate.longitude);
-        pandas.createMarker(coordinateToShowOnMap, "coordinate");
+        coordinate = coordinates[i];
+        coordinatesToShowOnMap.push(new L.LatLng(coordinate.latitude, coordinate.longitude));
+
     }
+    pandas.paintHeatmap(coordinatesToShowOnMap, "coordinate");
 }
 
 $( function() {
